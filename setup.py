@@ -9,6 +9,7 @@ skrgit = r"""
 @echo off
 setlocal
 set ARG1=%%~1
+echo %ARG1%
 if "%%ARG1%%"=="-rfg" call :run_from_git %%2 & exit /b
 if "%%ARG1%%"=="-py" call :install_python %%2 & exit /b
 if "%%ARG1%%"=="-help" call :help & exit /b
