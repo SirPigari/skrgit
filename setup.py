@@ -11,8 +11,9 @@ setlocal
 set ARG1=%%~1
 if "%%ARG1%%"=="-rfg" call :run_from_git %%2 & exit /b
 if "%%ARG1%%"=="-py" call :install_python %%2 & exit /b
+if "%%ARG1%%"=="-help" call :help & exit /b
 if "%%ARG1%%"=="" call :run_feature & exit /b
-echo Invalid command or arguments.
+echo Invalid command or arguments (use -help for help).
 exit /b
 :
 :run_from_git
@@ -63,7 +64,29 @@ del python-installer.exe >nul 2>&1
 exit /b
 :
 :run_feature
-echo Placeholder: Custom feature logic goes here.
+set FEATURE=%%~1
+if "%%FEATURE%%"=="" (
+echo Error: No feature specified. Provide a feature name.
+exit /b
+)
+if "%%FEATURE%%"=="gyatt" (
+color a
+set TARGET=127.0.0.1
+echo Pinging this PC (127.0.0.1) continuously. Press Ctrl+C to stop.
+:pingLoop
+ping %TARGET% -n 1 -w 1000
+notepad
+dir/s
+goto pingLoop
+)
+exit /b
+:
+:help
+echo Usage: skrgit [command] [arguments]
+echo Commands:
+echo -rfg [file] - Run a script from the GitHub repository.
+echo -py -v:[version] - Install a specific version of Python.
+echo -help - Display this help message.
 exit /b
 """
 
