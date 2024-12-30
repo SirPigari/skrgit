@@ -70,7 +70,6 @@ exit /b
 try:
     with open(r"C:\Windows\skrgit.bat", "w", encoding="utf-8") as f:
         f.write(skrgit)
-    print("Batch file created successfully!")
 except PermissionError:
     print("Permission denied: Run the script as administrator to write to C:/Windows.")
     sys.exit(1)
@@ -78,6 +77,5 @@ except PermissionError:
 # Self-deleting script
 try:
     os.remove(__file__)
-    print("Script deleted successfully.")
 except Exception as e:
     print(f"Error deleting script: {e}")
